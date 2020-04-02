@@ -34,6 +34,11 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -qq install -y pyth
 RUN pip install cstruct && cd /tmp/ && git clone https://github.com/sviehb/jefferson && (cd jefferson && sudo python setup.py install)
 ################ End jefferson ################
 
+################ Section kernel. Issue #1 ################
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -qq install -y bc cpio
+RUN dpkg --add-architecture amd64 && apt update && DEBIAN_FRONTEND=noninteractive apt-get -qq install -y libc6:amd64
+################ End kernel ################
+
 ENV TERM xterm
 ENV ON_ENTRY_SCRIPT=$ON_ENTRY_SCRIPT
 
